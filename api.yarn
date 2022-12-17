@@ -1,0 +1,308 @@
+openapi: 3.0.3
+info:
+  title: Streaming API
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+
+servers:
+  - url: http://44.204.19.35:9000/v1
+
+
+paths:
+  /auth/login/:
+    post:
+      description: Permite autenticar un usuario
+      operationId: auth-user
+      requestBody:
+        description: Autenticacion
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string              
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  token:
+                    type: string
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+
+  /auth/register/:
+    post:
+      description: Permite registrar un nuevo usuario
+      operationId: register-user
+      requestBody:
+        description: Registro
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string              
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  token:
+                    type: string
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+  /items-rangom/:
+    get:
+      description: Devuelme un item aleatorio  
+      operationId: Random item
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  datas:
+                    type: object
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+
+  /items/:
+    get:
+      description: Devuelme un listado con todos los items
+      operationId: Itmes list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  datas:
+                    type: object
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+  /items-views/:
+    get:
+      description: Devuelme un listado con todos los items marcados como visto
+      operationId: Itmes views list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  datas:
+                    type: object
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+
+  /item/{ItemId}/:
+    get:
+      description: Devuelve los datos de un solo item en espesifico  
+      operationId: Get item data
+      parameters:
+        - in: path
+          name: ItemId
+          schema:
+            type: integer
+          required: true
+          description: Id del item
+          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  datas:
+                    type: object
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+
+  /item/{ItemId}/view/:
+    post:
+      description: Permite marcar un item como visto  
+      operationId: Set item view
+      parameters:
+        - in: path
+          name: ItemId
+          schema:
+            type: integer
+          required: true
+          description: Id del item
+          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  datas:
+                    type: object
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+
+
+  /item/{ItemId}/rating/:
+    post:
+      description: Permite puntuar un item en espesifico  
+      operationId: Set item rating
+      parameters:
+        - in: path
+          name: ItemId
+          schema:
+            type: integer
+          required: true
+          description: Id del item
+      requestBody:
+        description: Puntuacion de un usuario
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score:
+                  type: integer
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  datas:
+                    type: object
+                    
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+
+
+
